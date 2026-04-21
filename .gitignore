@@ -77,6 +77,10 @@ web_modules/
 # Next.js build output
 .next
 out
+next-env.d.ts
+
+# Local setup script (references absolute paths)
+setup-assets.js
 
 # Nuxt.js build / generate output
 .nuxt
