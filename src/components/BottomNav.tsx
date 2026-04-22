@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { Home, ListChecks, Bookmark, Settings } from 'lucide-react';
 import { RecordButton } from './RecordButton';
-import { useRecorder } from '@/hooks/useRecorder';
 import { useCallback } from 'react';
 
 interface NavItem {
@@ -24,15 +23,10 @@ const NAV_ITEMS: NavItem[] = [
 export function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const { isRecording, startRecording, stopRecording } = useRecorder();
 
   const handleRecordPress = useCallback(() => {
-    if (isRecording) {
-      stopRecording();
-    } else {
-      startRecording();
-    }
-  }, [isRecording, startRecording, stopRecording]);
+    router.push('/record');
+  }, [router]);
 
   const leftItems = NAV_ITEMS.slice(0, 2);
   const rightItems = NAV_ITEMS.slice(2);
@@ -72,10 +66,7 @@ export function BottomNav() {
 
         {/* Center Record Button (elevated) */}
         <div className="flex flex-1 items-center justify-center -mt-5">
-          <RecordButton
-            isRecording={isRecording}
-            onClick={handleRecordPress}
-          />
+          <RecordButton onClick={handleRecordPress} />
         </div>
 
         {/* Right nav items */}
